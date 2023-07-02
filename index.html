@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Permissão de Localização e Redirecionamento</title>
+</head>
+<body>
+  <h1>Permissão de Localização e Redirecionamento</h1>
+  
+  <p>Este site requer sua permissão para ligar a localização do dispositivo antes de redirecionar para um link externo.</p>
+  
+  <button id="btnPermitir" onclick="solicitarPermissao()">Permitir</button>
+  
+  <script>
+    function solicitarPermissao() {
+      // Verifica se o navegador suporta a API de geolocalização
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          // Permissão concedida, redireciona para o link
+          window.location.href = 'https://www.exemplo.com';
+        }, function(error) {
+          if (error.code === 1) {
+            // Permissão negada, exibe uma mensagem de erro
+            alert('A permissão para acessar a localização foi negada. O redirecionamento é necessário para acessar o link.');
+          } else {
+            // Erro ao obter a localização, exibe uma mensagem de erro
+            alert('Ocorreu um erro ao obter a localização do dispositivo.');
+          }
+        });
+      } else {
+        // Navegador não suporta a API de geolocalização, redireciona diretamente
+        window.location.href = 'https://www.exemplo.com';
+      }
+    }
+  </script>
+</body>
+</html>
+                              
